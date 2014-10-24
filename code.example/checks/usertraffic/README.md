@@ -11,3 +11,16 @@ cd /etc/dd-agent/conf.d
 wget https://raw.githubusercontent.com/mar3/datadog.note/master/code.example/checks/usertraffic/usertraffic.yaml
 chown dd-agent usertraffic.yaml
 ```
+
+run test.
+
+```
+# /etc/init.d/datadog-agent configtest
+```
+
+(re)start agent.
+
+```
+# service datadog-agent restart
+```
+
