@@ -1,6 +1,6 @@
-##setting
+##準備
 
-placing.
+####配置
 
 ```
 cd /etc/dd-agent/checks.d
@@ -12,15 +12,35 @@ wget https://raw.githubusercontent.com/mar3/datadog.note/master/code.example/che
 chown dd-agent usertraffic.yaml
 ```
 
-run test.
+テストを必ず実施
 
 ```
 # /etc/init.d/datadog-agent configtest
 ```
 
-(re)start agent.
+####sudoers の編集
+
+```
+# visudo
+```
+
+↓追記
+
+```
+dd-agent ALL=(ALL) NOPASSWD: /sbin/iptables*
+```
+
+requiretty は off
+
+```
+#Defaults    requiretty
+```
+
+
+##実行
+
+必ず(再)起動
 
 ```
 # service datadog-agent restart
 ```
-
