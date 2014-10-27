@@ -2,7 +2,7 @@
 #
 # Agent Check のテスト中...
 #
-#
+# TODO: _main() から実行できるようにしたい...
 #
 #
 #
@@ -166,3 +166,7 @@ class UserTrafficCheck(AgentCheck):
 		# exit
 		#
 		return
+
+def _main():
+	
+	pass
