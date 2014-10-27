@@ -166,7 +166,3 @@ class UserTrafficCheck(AgentCheck):
 		# exit
 		#
 		return
-
-def _main():
-	
-	pass
