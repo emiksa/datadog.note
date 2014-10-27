@@ -56,6 +56,10 @@ class UserTrafficCheck(AgentCheck):
 			if line == '':
 				continue
 
+			#
+			# TODO: ここに処理を書かず、関数に分離すること
+			#
+			
 			fields = line.split()
 
 			if fields[0] == 'Chain':
