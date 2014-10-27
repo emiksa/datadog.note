@@ -33,6 +33,9 @@ class UserTrafficCheck(AgentCheck):
 	@staticmethod
 	def _netfilter():
 
+		#
+		# TODO: 'service iptables status' に変更すること
+		#
 		command = ['sudo', '-u', 'root', '/sbin/iptables',
 				'--list', '-nvx', '--line-numbers']
 
