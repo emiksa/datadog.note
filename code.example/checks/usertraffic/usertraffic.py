@@ -1,13 +1,18 @@
 # coding: utf-8
+#
+# Agent Check のテスト中...
+#
+#
+#
+#
+#
+#
+#
 
 
 
-
-import sys
+import socket
 import subprocess
-import json
-import codecs
-import random
 from checks import AgentCheck
 
 
@@ -121,29 +126,36 @@ class UserTrafficCheck(AgentCheck):
 
 	def check(self, instance):
 
+		#
+		# 長いコンピューター名
+		#
+		hostname = socket.gethostname()
+
+		#
+		# iptables を実行して結果を読み取り(テスト中)
+		#
 		result = UserTrafficCheck._netfilter()
 
+		#
+		# 取り出し(テスト中)
+		#
 		for chain, entries in result.iteritems():
 
 			for number, item in entries.iteritems():
 
 				key, bytes, tags = UserTrafficCheck._analyze_item(chain, item)
+
 				if key is None or key == '':
 					continue
+
+				tags = ['host:' + hostname] + tags
 
 				#
 				# sending
 				#
 				self.gauge(key, bytes, tags = tags)
 
+		#
+		# exit
+		#
 		return
-
-		self.gauge(
-			'test',
-			random.random() * 1000,
-			tags = {
-				'protocol:tcp',
-				'direction:in',
-				'port:80'
-			}
-		)
