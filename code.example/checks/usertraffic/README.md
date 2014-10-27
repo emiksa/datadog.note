@@ -44,3 +44,13 @@ requiretty は off
 ```
 # service datadog-agent restart
 ```
+
+##メモ
+
+実際に手動でチェックを実施することができる
+
+```
+# sudo -u dd-agent dd-agent check 'usertraffic'
+```
+
+
