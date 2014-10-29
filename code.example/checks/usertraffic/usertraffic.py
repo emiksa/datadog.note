@@ -1,16 +1,19 @@
+#!/opt/datadog-agent/embedded/bin/python
 # coding: utf-8
 #
 # Agent Check のテスト中...
 #
 # TODO: _main() から実行できるようにしたい...
-#
-#
+# → sudo できるからまあいいか...
+#    [# sudo -u dd-agent dd-agent check usertraffic]
 #
 #
 #
 
 
 
+import sys
+sys.path.append('/opt/datadog-agent/agent')
 import socket
 import subprocess
 from checks import AgentCheck
@@ -22,12 +25,15 @@ class UserTrafficCheck(AgentCheck):
 	def _read_port_number(current_chain, field):
 
 		if current_chain == 'INPUT':
-			if field.startswith('dpt:'):
-				return field[4:]
+			pos = field.find('dpt:')
+			if 0 <= pos:
+				return field[pos + 4:]
 		elif current_chain == 'OUTPUT':
-			if field.startswith('spt:'):
-				return field[4:]
-
+			pos = field.find('spt:')
+			if 0 <= pos:
+				return field[pos + 4:]
+			# if field.startswith('spt:'):
+				# return field[4:]
 		return 0
 
 	@staticmethod
@@ -76,8 +82,8 @@ class UserTrafficCheck(AgentCheck):
 				#
 				# reading rule and status
 				#
-				num = fields[0]
-				port = UserTrafficCheck._read_port_number(current_chain, fields[11])
+				num = int(fields[0])
+				port = UserTrafficCheck._read_port_number(current_chain, line)
 				if port == 0:
 					continue
 				new_entry = {
@@ -166,3 +172,26 @@ class UserTrafficCheck(AgentCheck):
 		# exit
 		#
 		return
+
+def _println(*args):
+	for x in args:
+		sys.stdout.write(x)
+	print
+
+if __name__ == '__main__':
+
+	if False:
+		check, instances = UserTrafficCheck.from_yaml(
+				'/etc/dd-agent/conf.d/usertraffic.yaml')
+		for instance in instances:
+			check.check(instance)
+			print 'OK.'
+
+	if True:
+		result = UserTrafficCheck._netfilter()
+		import json
+		print json.dumps(result, indent=4)
+		for chain, entries in result.iteritems():
+			for number, item in entries.iteritems():
+				key, bytes, tags = UserTrafficCheck._analyze_item(chain, item)
+				_println('key=[', str(key), '], bytes=[', str(bytes), '], tags=', str(tags))
