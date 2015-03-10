@@ -142,7 +142,7 @@ class UserTrafficCheck(AgentCheck):
 		#
 		# 長いコンピューター名
 		#
-		hostname = socket.gethostname()
+		# hostname = socket.gethostname()
 
 		#
 		# iptables を実行して結果を読み取り(テスト中)
