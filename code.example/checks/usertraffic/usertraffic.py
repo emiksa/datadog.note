@@ -161,7 +161,8 @@ class UserTrafficCheck(AgentCheck):
 				if key is None or key == '':
 					continue
 
-				tags = ['host:' + hostname] + tags
+				# host: は自動的に付加される
+				# tags = ['host:' + hostname] + tags
 
 				#
 				# sending
