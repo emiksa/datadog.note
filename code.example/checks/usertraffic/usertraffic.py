@@ -14,7 +14,6 @@
 
 import sys
 sys.path.append('/opt/datadog-agent/agent')
-import socket
 import subprocess
 from checks import AgentCheck
 
@@ -39,9 +38,6 @@ class UserTrafficCheck(AgentCheck):
 	@staticmethod
 	def _netfilter():
 
-		#
-		# TODO: 'service iptables status' に変更すること
-		#
 		command = ['sudo', '-u', 'root', '/sbin/iptables',
 				'--list', '-nvx', '--line-numbers']
 
@@ -140,11 +136,6 @@ class UserTrafficCheck(AgentCheck):
 	def check(self, instance):
 
 		#
-		# 長いコンピューター名
-		#
-		# hostname = socket.gethostname()
-
-		#
 		# iptables を実行して結果を読み取り(テスト中)
 		#
 		result = UserTrafficCheck._netfilter()
@@ -160,9 +151,6 @@ class UserTrafficCheck(AgentCheck):
 
 				if key is None or key == '':
 					continue
-
-				# host: は自動的に付加される
-				# tags = ['host:' + hostname] + tags
 
 				#
 				# sending
