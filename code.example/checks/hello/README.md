@@ -1,6 +1,6 @@
 ##settings
 
-Placing
+detail
 
 ```
 -rw-r--r--. 1 dd-agent dd-agent 156 2014-10-22 17:53:47.599544936 +0900 /etc/dd-agent/checks.d/hello.py
