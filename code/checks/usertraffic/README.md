@@ -3,13 +3,13 @@
 ####配置
 
 ```
-cd /etc/dd-agent/checks.d
-wget https://raw.githubusercontent.com/mass10/datadog.note/master/code/checks/usertraffic/usertraffic.py
-chown dd-agent:dd-agent usertraffic.py
+# cd /etc/dd-agent/checks.d
+# wget https://raw.githubusercontent.com/mass10/datadog.note/master/code/checks/usertraffic/usertraffic.py
+# chown dd-agent:dd-agent usertraffic.py
 
-cd /etc/dd-agent/conf.d
-wget https://raw.githubusercontent.com/mass10/datadog.note/master/code/checks/usertraffic/usertraffic.yaml
-chown dd-agent usertraffic.yaml
+# cd /etc/dd-agent/conf.d
+# wget https://raw.githubusercontent.com/mass10/datadog.note/master/code/checks/usertraffic/usertraffic.yaml
+# chown dd-agent usertraffic.yaml
 ```
 
 テストを必ず実施
